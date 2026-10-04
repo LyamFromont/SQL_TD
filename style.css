@@ -1,0 +1,581 @@
+/* ============================
+   RÉGLAGES GÉNÉRAUX
+============================ */
+
+:root {
+  --noir-page: #080808;
+  --noir-clair: #121212;
+  --noir-carte: #181818;
+  --rouge: #e32636;
+  --rouge-fonce: #991b1b;
+  --orange: #ff7a18;
+  --orange-clair: #ffad42;
+  --blanc: #f8fafc;
+  --gris: #b9bec7;
+  --bordure: #343434;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 60px 20px;
+  color: var(--blanc);
+  background-color: var(--noir-page);
+  background-image:
+    radial-gradient(
+      circle at 15% 15%,
+      rgb(227 38 54 / 18%),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgb(255 122 24 / 14%),
+      transparent 32%
+    ),
+    linear-gradient(
+      rgb(255 255 255 / 2%) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgb(255 255 255 / 2%) 1px,
+      transparent 1px
+    );
+  background-size:
+    auto,
+    auto,
+    35px 35px,
+    35px 35px;
+  font-family: Inter, Arial, sans-serif;
+}
+
+/* Halo décoratif fixe */
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -180px;
+  left: 50%;
+  z-index: -1;
+  width: 600px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgb(255 80 20 / 12%);
+  filter: blur(100px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.conteneur {
+  width: min(950px, 100%);
+  margin: 0 auto;
+}
+
+
+/* ============================
+   TITRE PRINCIPAL
+============================ */
+
+.en-tete-principal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 45px;
+  padding: 25px 28px;
+  overflow: hidden;
+  border: 1px solid rgb(255 122 24 / 35%);
+  border-left: 5px solid var(--rouge);
+  border-radius: 14px;
+  background:
+    linear-gradient(
+      120deg,
+      rgb(227 38 54 / 15%),
+      transparent 45%
+    ),
+    var(--noir-clair);
+  box-shadow:
+    0 18px 50px rgb(0 0 0 / 45%),
+    0 0 30px rgb(227 38 54 / 8%);
+}
+
+/* Barre orange décorative */
+
+.en-tete-principal::after {
+  content: "";
+  position: absolute;
+  right: -50px;
+  bottom: -80px;
+  width: 220px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgb(255 122 24 / 13%);
+  filter: blur(30px);
+}
+
+.icone-bdd {
+  display: grid;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border: 1px solid rgb(255 173 66 / 45%);
+  border-radius: 15px;
+  color: var(--orange-clair);
+  background:
+    linear-gradient(
+      145deg,
+      rgb(227 38 54 / 25%),
+      rgb(255 122 24 / 8%)
+    );
+  box-shadow:
+    inset 0 0 20px rgb(255 122 24 / 10%),
+    0 8px 20px rgb(0 0 0 / 30%);
+  font-size: 30px;
+}
+
+.titre-principal {
+  margin: 0;
+  color: var(--blanc);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  text-shadow: 0 4px 18px rgb(0 0 0 / 60%);
+}
+
+.titre-principal::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 4px;
+  margin-top: 13px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    var(--rouge),
+    var(--orange)
+  );
+  box-shadow: 0 0 14px rgb(255 85 20 / 40%);
+}
+
+.sous-titre-principal {
+  margin: 13px 0 0;
+  color: var(--gris);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+
+/* ============================
+   BLOC DE CODE
+============================ */
+
+.bloc-code {
+  margin-bottom: 35px;
+  overflow: hidden;
+  border: 1px solid var(--bordure);
+  border-radius: 13px;
+
+  /*
+   * Le fond autour du code reste sombre afin de bien
+   * s'accorder avec le thème Android Studio.
+   */
+  background-color: #282b2e;
+
+  box-shadow:
+    0 18px 45px rgb(0 0 0 / 45%),
+    0 0 0 1px rgb(255 255 255 / 2%);
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.bloc-code:hover {
+  border-color: rgb(255 122 24 / 55%);
+  box-shadow:
+    0 22px 55px rgb(0 0 0 / 55%),
+    0 0 24px rgb(227 38 54 / 9%);
+  transform: translateY(-3px);
+}
+
+
+/* ============================
+   TITRE SECONDAIRE
+============================ */
+
+.entete-code {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 18px 22px;
+  border-bottom: 1px solid #393939;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(227 38 54 / 13%),
+      rgb(255 122 24 / 5%) 45%,
+      transparent
+    ),
+    #171717;
+}
+
+/* Petite ligne verticale orange */
+
+.entete-code::before {
+  content: "";
+  position: absolute;
+  top: 17px;
+  bottom: 17px;
+  left: 0;
+  width: 4px;
+  border-radius: 0 5px 5px 0;
+  background: linear-gradient(
+    var(--rouge),
+    var(--orange)
+  );
+}
+
+.titre-code {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 750;
+  letter-spacing: 0.2px;
+}
+
+.titre-code::before {
+  content: "SQL";
+  display: inline-block;
+  margin-right: 11px;
+  padding: 4px 7px;
+  border: 1px solid rgb(255 122 24 / 40%);
+  border-radius: 5px;
+  color: var(--orange-clair);
+  background-color: rgb(255 122 24 / 9%);
+  font-family: Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  vertical-align: 3px;
+}
+
+.commentaire-code {
+  max-width: 650px;
+  margin: 8px 0 0;
+  color: #b8bdc5;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+
+/* ============================
+   BOUTON COPIER
+============================ */
+
+.bouton-copier {
+  flex-shrink: 0;
+  padding: 9px 15px;
+  border: 1px solid rgb(255 122 24 / 55%);
+  border-radius: 7px;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--rouge-fonce),
+      #bd3e19
+    );
+  box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    filter 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.bouton-copier:hover {
+  filter: brightness(1.18);
+  box-shadow: 0 7px 20px rgb(227 38 54 / 25%);
+  transform: translateY(-2px);
+}
+
+.bouton-copier:active {
+  transform: translateY(0);
+}
+
+
+/* ============================
+   CODE ANDROID STUDIO
+============================ */
+
+.bloc-code pre {
+  margin: 0;
+  overflow-x: auto;
+
+  /*
+   * Couleur utilisée par le thème Android Studio.
+   * Elle évite une coupure visuelle avec le code.
+   */
+  background-color: #282b2e;
+}
+
+.bloc-code code.hljs {
+  display: block;
+  padding: 18px 0;
+  background-color: #282b2e;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  tab-size: 4;
+}
+
+.ligne-code {
+  display: block;
+  min-width: max-content;
+  min-height: 1.65em;
+  padding-right: 24px;
+}
+
+/* Effet lorsque la souris passe sur une ligne */
+
+.ligne-code:hover {
+  background-color: rgb(255 255 255 / 4%);
+}
+
+.ligne-code::before {
+  content: attr(data-ligne);
+  display: inline-block;
+  width: 55px;
+  margin-right: 18px;
+  padding-right: 15px;
+  color: #777d83;
+  border-right: 1px solid #45494d;
+  text-align: right;
+  user-select: none;
+}
+
+
+/* ============================
+   VERSION MOBILE
+============================ */
+
+@media (max-width: 650px) {
+  body {
+    padding: 30px 14px;
+  }
+
+  .en-tete-principal {
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .icone-bdd {
+    flex-basis: 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+
+  .titre-principal {
+    font-size: 1.8rem;
+  }
+
+  .entete-code {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .bouton-copier {
+    width: 100%;
+  }
+
+  .bloc-code code.hljs {
+    font-size: 0.84rem;
+  }
+
+  .ligne-code::before {
+    width: 42px;
+    margin-right: 12px;
+    padding-right: 10px;
+  }
+}
+
+/* ============================
+   NAVIGATION DES TD
+============================ */
+
+.navigation-td {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+  padding: 14px;
+  border: 1px solid rgb(255 122 24 / 25%);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(227 38 54 / 8%),
+      rgb(255 122 24 / 5%)
+    ),
+    #121212;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 30%);
+}
+
+.choix_td {
+  min-width: 85px;
+  padding: 11px 20px;
+  border: 1px solid #3f3f3f;
+  border-radius: 8px;
+  color: #d8d8d8;
+  background-color: #1c1c1c;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.choix_td:hover {
+  color: #ffffff;
+  border-color: rgb(255 122 24 / 65%);
+  background-color: #28201b;
+  box-shadow: 0 6px 18px rgb(255 90 20 / 12%);
+  transform: translateY(-2px);
+}
+
+.choix_td.actif {
+  color: #ffffff;
+  border-color: var(--orange);
+  background: linear-gradient(
+    135deg,
+    var(--rouge-fonce),
+    #c44717
+  );
+  box-shadow:
+    0 7px 20px rgb(227 38 54 / 22%),
+    inset 0 1px 0 rgb(255 255 255 / 12%);
+}
+
+
+/* ============================
+   TITRE SECONDAIRE
+============================ */
+
+.titre-secondaire {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 24px;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.titre-secondaire::before {
+  content: "";
+  width: 7px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    var(--rouge),
+    var(--orange)
+  );
+  box-shadow: 0 0 14px rgb(255 90 20 / 35%);
+}
+
+.titre-secondaire::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgb(255 122 24 / 60%),
+    transparent
+  );
+}
+
+
+/* ============================
+   VERSION MOBILE
+============================ */
+
+@media (max-width: 650px) {
+  .navigation-td {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .choix_td {
+    min-width: 0;
+    padding-inline: 10px;
+  }
+
+  .titre-secondaire {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* ===============================
+    BOUTON TOP 
+================================= */
+
+
+.button-haut {
+  /* Positionnement fixe en bas à droite */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Reste au-dessus du contenu */
+
+  /* Forme ronde et taille */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  /* Style du bouton */
+  background-color: var(--orange); /* Couleur bleue (à modifier selon vos goûts) */
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  /* Alignement du texte/icône au centre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+
+  /* Ombre pour donner du relief */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /* Animation au survol */
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+/* Effet au survol (hover) */
+.button-haut:hover {
+  background-color: var(--rouge);
+  transform: scale(1.05); /* Grossit légèrement */
+}

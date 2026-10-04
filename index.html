@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Rendu TD SQL</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/androidstudio.min.css"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="conteneur">
+    <a href="#haut" class = "button-haut" > ⬆ </a>
+    <section id="haut"></section>
+    <header class="en-tete-principal">
+      <span class="icone-bdd" aria-hidden="true">▰</span>
+
+      <div>
+        <h1 class="titre-principal">Rendu TD</h1>
+
+        <p class="sous-titre-principal">
+          Travaux dirigés sur les bases de données et le langage SQL
+        </p>
+      </div>
+    </header>
+
+    <!-- Navigation entre les TD -->
+    <nav class="navigation-td" aria-label="Sélection du TD">
+      <a class="choix_td" type="button" href="#td1">TD1</a>
+      <a class="choix_td" type="button" href="#td2">TD2</a>
+      <a class="choix_td" type="button" href="#td3">TD3</a>
+    </nav>
+<section id="td1"></section>
+    <h2 class="titre-secondaire">TD1</h2>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Création des table</h2>
+
+          
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">CREATE TABLE EMPLOYE AS SELECT * FROM basetd.employe;
+CREATE TABLE SERVICE AS SELECT * FROM basetd.service;
+CREATE TABLE PROJET AS SELECT * FROM basetd.projet;
+CREATE TABLE TRAVAIL AS SELECT * FROM basetd.travail;
+CREATE TABLE CONCERNE AS SELECT * FROM basetd.concerne;</code></pre></section>
+
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Création clé primaire </h2>
+
+          
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">ALTER TABLE EMPLOYE ADD CONSTRAINT PK_employe PRIMARY KEY (nuempl); 
+ALTER TABLE SERVICE ADD CONSTRAINT PK_service PRIMARY KEY (nuserv); 
+ALTER TABLE PROJET ADD CONSTRAINT PK_projet PRIMARY KEY (nuproj); 
+ALTER TABLE TRAVAIL ADD CONSTRAINT PK_travail PRIMARY KEY (nuempl,nuproj);
+ALTER TABLE CONCERNE ADD CONSTRAINT PK_concerne PRIMARY KEY (nuserv,nuproj);</code></pre></section>
+    </section>
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Création clé étrangère </h2>
+
+          
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">ALTER TABLE EMPLOYE ADD CONSTRAINT FK_employe FOREIGN KEY (affect) REFERENCES SERVICE(nuserv); 
+ALTER TABLE TRAVAIL ADD CONSTRAINT FK_travaille_employe FOREIGN KEY (nuempl) REFERENCES EMPLOYE(nuempl); 
+ALTER TABLE TRAVAIL ADD CONSTRAINT FK_travaille_projet FOREIGN KEY (nuproj) REFERENCES PROJET(nuproj); 
+ALTER TABLE CONCERNE ADD CONSTRAINT FK_concerne_service FOREIGN KEY (nuserv) REFERENCES SERVICE(nuserv); 
+ALTER TABLE CONCERNE ADD CONSTRAINT FK_concerne_projet FOREIGN KEY (nuproj) REFERENCES PROJET(nuproj); 
+ALTER TABLE PROJET ADD CONSTRAINT FK_reponsable FOREIGN KEY (resp) REFERENCES EMPLOYE (nuempl);</code></pre></section>
+
+
+<section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Test insertion et suppression</h2>
+
+          <p class="commentaire-code">
+            Correct 
+          </p>
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO SERVICE VALUES (67,'les_profs_cool',15); 
+INSERT INTO EMPLOYE VALUES (10,'RAOUL',20,67);
+INSERT INTO EMPLOYE VALUES (15,'BERDJUGIN',35,67);
+INSERT INTO EMPLOYE VALUES (7,'SIMONNEAU',23,67);
+INSERT INTO PROJET VALUES (12,'Tourbillon',7); 
+INSERT INTO TRAVAIL VALUES (10,12,2); 
+INSERT INTO CONCERNE VALUES (67,12);
+
+DELETE FROM TRAVAIL
+WHERE nuempl = 20 ; 
+DELETE FROM EMPLOYE
+WHERE nuempl = 20 ;
+</code></pre></section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+<p class="commentaire-code">
+            Incorrect 
+          </p>
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO EMPLOYE VALUES (10,'LANOIX',20,67); // clé primaire incorect 
+INSERT INTO TRAVAIL VALUES (10,12,2); // clé primaire incorect 
+INSERT INTO SERVICE VALUES (67,'les_profs_pas_cool',15); // clé primaire incorect 
+INSERT INTO PROJET VALUES (12,'LALA',2); // clé primaire incorect 
+INSERT INTO CONCERNE VALUES (67,12); // clé primaire incorect </code></pre></section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+            <h2 class="titre-code">Test pour les erreurs de contraintes d'intégrité et les code oracle</h2>
+          
+        </div>
+<button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO EMPLOYE VALUES (61,'HERNANDEZ',20,68); 
+DELETE FROM SERVICE WHERE nuserv =67 ;
+INSERT INTO TRAVAIL VALUES (21,12,3); 
+DELETE FROM EMPLOYE WHERE nuempl =10 ;
+INSERT INTO TRAVAIL VALUES (10,21,3); 
+DELETE FROM PROJET WHERE nuproj =12 ;
+INSERT INTO TRAVAIL VALUES (10,21,3); 
+DELETE FROM PROJET WHERE nuproj =12 ;
+INSERT INTO CONCERNE VALUES (11,12); 
+DELETE FROM SERVICE WHERE nuproj =67 ;
+INSERT INTO CONCERNE VALUES (11,12); 
+DELETE FROM PROJET WHERE nuproj =12 ;
+insert into employe values (54,'llllaaaallaalalallalalalallalalalal',54,67);
+insert into employe values (540000,'la',54,67);
+</code></pre>
+    </section>
+
+
+
+<!-- Mettre le tableau -->
+
+
+<section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Ajout FK-chef</h2>
+
+
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">ALTER TABLE SERVICE DROP CONSTRAINT FK_CHEF;
+ALTER TABLE EMPLOYE 
+ADD CONSTRAINT UNQ_EMPL_AFFECT 
+;</code></pre>
+    </section>
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Ajout contraint Diféré</h2>
+
+
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">UNIQUE (nuempl, affect);
+ALTER TABLE SERVICE ADD CONSTRAINT FK_CHEF FOREIGN KEY (chef,nuserv) REFERENCES EMPLOYE (nuempl,affect) INITIALLY DEFERRED;</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">TEST</h2>
+
+        
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">commit;
+DELETE FROM employe WHERE nuempl = 99 ; 
+DELETE FROM SERVICE WHERE nuserv = 33 ; 
+
+INSERT INTO service VALUES (33,'les_éleves',99);
+INSERT INTO employe VALUES (99,'ribaltchanko',20,33);
+
+commit;
+
+INSERT INTO service VALUES (20,'Le_bde',99);
+
+commit;
+
+DELETE FROM employe WHERE nuempl = 99 ; 
+ 
+commit;</code></pre></section>
+
+ <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">AUTREE CONSTRAINT</h2>
+
+          
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">ALTER TABLE EMPLOYE ADD CONSTRAINT K_horraire CHECK (hebdo <=35) ;</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">TESTr</h2>
+
+          <p class="commentaire-code">
+            erreur
+          </p>
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO EMPLOYE VALUES (32,'LYYAM',36,33);</code></pre>
+    </section>
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Partie 2 : Mise à jour des salaires</h2>
+        </div>
+        <button class="bouton-copier" type="button">Copier</button>
+      </header>
+      <pre><code class="language-sql">-- PARTIE 2 -- 
+alter table employe add salaire number ;
+
+--UPDATE EMPLOYE SET salaire = 2500 where nuempl in (SELECT nuempl FROM employe,projet WHERE projet.resp = employe.nuempl and employe.salaire < 2500) ;
+---UPDATE EMPLOYE SET salaire = 3500 where nuempl in (SELECT chef FROM service WHERE service.chef = employe.nuempl and employe.salaire < 3500);
+--UPDATE EMPLOYE SET salaire = 2000 where nuempl in (SELECT nuempl FROM employe where nuempl not in (Select chef from service) and nuempl not in (select resp from projet) and salaire >2000);
+
+SELECT nuempl FROM employe,projet WHERE projet.resp = employe.nuempl and employe.salaire < 2500;
+SELECT nuempl FROM employe,service WHERE service.chef = employe.nuempl and employe.salaire < 3500; 
+SELECT nuempl FROM employe where nuempl not in (Select chef from service) and nuempl not in (select resp from projet) and salaire >2000;</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Test en rajoutant des salaires</h2>
+        </div>
+        <button class="bouton-copier" type="button">Copier</button>
+      </header>
+      <pre><code class="language-sql">UPDATE employe 
+SET salaire = FLOOR(DBMS_RANDOM.VALUE(1000, 5000));
+
+-- on test les select et puis les update les deux fonctionne (par rapport a l'énoncé du td)</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Employé qui travaille trop</h2>
+        </div>
+        <button class="bouton-copier" type="button">Copier</button>
+      </header>
+      <pre><code class="language-sql">Select * from employe e where hebdo < ( SELECT SUM(duree) FROM TRAVAIL where e.nuempl = travail.nuempl);</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Responsable de moins de 3 projets</h2>
+        </div>
+        <button class="bouton-copier" type="button">Copier</button>
+      </header>
+      <pre><code class="language-sql">SELECT resp
+FROM projet
+GROUP BY resp
+HAVING COUNT(*) > 3;
+
+--test-- 
+ 
+insert into projet values(56,'destruction',30) ;
+--fonctionne bien on trouve 30
+DELETE FROM projet where nuproj = 56;</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Chef de service gagnant plus que les employés</h2>
+        </div>
+        <button class="bouton-copier" type="button">Copier</button>
+      </header>
+      <pre><code class="language-sql">SELECT  e.nuempl from employe e 
+join service s on e.affect = s .nuserv
+JOIN employe chef ON s.chef = chef.nuempl
+where e.salaire > chef.salaire;
+
+--test-- 
+update employe set salaire =1000000 where nuempl = 7; 
+-- ça fonctionne 
+update employe set salaire =3499  where nuempl in (SELECT  e.nuempl from employe e 
+join service s on e.affect = s .nuserv
+JOIN employe chef ON s.chef = chef.nuempl
+where e.salaire > chef.salaire);</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Service concerné par plus de 2 projets</h2>
+        </div>
+        <button class="bouton-copier" type="button">Copier</button>
+      </header>
+      <pre><code class="language-sql">SELECT nuserv
+FROM concerne 
+GROUP BY nuserv
+HAVING COUNT(*) > 2;
+
+delete from concerne where nuserv in (SELECT nuserv
+FROM concerne 
+GROUP BY nuserv
+HAVING COUNT(*) > 2);</code></pre>
+    </section>
+
+
+<section id="td2">
+    <h2 class="titre-secondaire">TD2</h2>
+</section>
+
+<section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Création Premier TRIGGER </h2>
+
+        
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO utilisateurs (nom, email, date_inscription)
+VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
+    </section>
+
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Ajout d’un utilisateur</h2>
+
+          <p class="commentaire-code">
+            Ajoute un nouvel utilisateur dans la base de données.
+          </p>
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO utilisateurs (nom, email, date_inscription)
+VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
+    </section>
+
+
+    
+
+    <!-- Exemple  -->
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>
+          <h2 class="titre-code">Ajout d’un utilisateur</h2>
+
+          <p class="commentaire-code">
+            Ajoute un nouvel utilisateur dans la base de données.
+          </p>
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">INSERT INTO utilisateurs (nom, email, date_inscription)
+VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
+    </section>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+
+  <script>
+    document.querySelectorAll("pre code").forEach((blocCode) => {
+      // Conservation du code original pour le bouton Copier
+      blocCode.dataset.codeOriginal = blocCode.textContent;
+
+      // Coloration syntaxique
+      hljs.highlightElement(blocCode);
+
+      // Ajout des numéros de ligne
+      const lignes = blocCode.innerHTML.split("\n");
+
+      blocCode.innerHTML = lignes
+        .map((ligne, index) => {
+          const contenu = ligne || "&#8203;";
+
+          return `
+            <span
+              class="ligne-code"
+              data-ligne="${index + 1}"
+            >${contenu}</span>
+          `;
+        })
+        .join("");
+    });
+
+    // Gestion des boutons Copier
+    document.querySelectorAll(".bouton-copier").forEach((bouton) => {
+      bouton.addEventListener("click", async () => {
+        const bloc = bouton.closest(".bloc-code");
+        const code = bloc.querySelector("code").dataset.codeOriginal;
+
+        try {
+          await navigator.clipboard.writeText(code);
+
+          bouton.textContent = "Copié !";
+
+          setTimeout(() => {
+            bouton.textContent = "Copier";
+          }, 1500);
+        } catch (erreur) {
+          bouton.textContent = "Erreur";
+          console.error("Impossible de copier le code :", erreur);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
