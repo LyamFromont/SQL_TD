@@ -296,3 +296,41 @@ delete from concerne where nuproj = 101;
 update concerne set nuserv = 5 where nuserv = 67 ;
 --Ereur
 --
+
+
+--Création du trigger TRIGGER_SALAIRE_SERV
+--Test du triggers sur service 
+update service SET chef = 7 where nuserv = 67; 
+--Erreur
+
+--Création du trigger TRIGGER_SALAIRE_CHEF
+--Test du triggers sur employe 
+update employe SET salaire = 5000 where nuempl = 7;
+--Ereure
+
+INSERT ALL into employe values (200,'paul',20,67,7000) 
+ into employe values (210,'jean',31,67,6000)
+ select * FROM DUAL ; 
+--Erreus Multiple
+
+
+--Création du trigger TRIGGER_SALAIRE_PROJ
+--Test sur la Table projet 
+update projet set resp = 28 where nuproj=237; 
+--ERREUR
+
+--Création du trigger TRIGGER_SALAIRE_RESP
+--Test sur la table employe
+update employe set salaire = 4000 where nuempl = 10;
+--ERREUR
+
+--Création du trigger TRIGGER_SALAIRE_TRAVAIL
+
+--Test sur la table travail
+insert into travail values (99,12,1);
+--ERREUR 
+
+insert All into travail values(99,12,1)
+ into travail values(41,12,3) 
+ select * FROM DUAL ; 
+--ERREURS MULTIPLES

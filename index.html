@@ -37,6 +37,12 @@
       <a class="choix_td" type="button" href="#td2">TD2</a>
       <a class="choix_td" type="button" href="#td3">TD3</a>
     </nav>
+
+    <div class="boutons-telechargement" aria-label="Téléchargements">
+      <a class="bouton-telechargement" href="TD1 (1).sql" download="TD1 (1).sql">Télécharger le fichier SQL</a>
+    <a class="bouton-telechargement" href="triggers.odt" download="triggers.odt">Télécharger Les TRIGGERS</a>
+    </div>
+
 <section id="td1"></section>
     <h2 class="titre-secondaire">TD1</h2>
 
@@ -179,6 +185,141 @@ insert into employe values (540000,'la',54,67);
 
 
 <!-- Mettre le tableau -->
+
+<div class="conteneur-tableau">
+  <table class="tableau-donnees">
+    <thead>
+      <tr>
+        <th>Nom Contrainte</th>
+        <th>Requête</th>
+        <th>Code d’erreur</th>
+        <th>Message d’erreur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PK_employe</td>
+        <td>INSERT INTO EMPLOYE VALUES (10,'LANOIX',20,67);</td>
+        <td>ORA-00001</td>
+        <td>violation de contrainte unique</td>
+      </tr>
+      <tr>
+        <td>PK_service</td>
+        <td>INSERT INTO TRAVAIL VALUES (10,12,2);</td>
+        <td>ORA-00001</td>
+        <td>violation de contrainte unique</td>
+      </tr>
+      <tr>
+        <td>PK_projet</td>
+        <td>INSERT INTO SERVICE VALUES (67,'les_profs_pas_cool',15);</td>
+        <td>ORA-00001</td>
+        <td>violation de contrainte unique</td>
+      </tr>
+      <tr>
+        <td>PK_travail</td>
+        <td>INSERT INTO PROJET VALUES (12,'LALA',2);</td>
+        <td>ORA-00001</td>
+        <td>violation de contrainte unique</td>
+      </tr>
+      <tr>
+        <td>PK_concerne</td>
+        <td>INSERT INTO CONCERNE VALUES (67,12);</td>
+        <td>ORA-00001</td>
+        <td>violation de contrainte unique</td>
+      </tr>
+      <tr>
+        <td>FK_employe</td>
+        <td>INSERT INTO EMPLOYE VALUES (61,'HERNANDEZ',20,68);</td>
+        <td>ORA-02291</td>
+        <td>violation de contrainte d'intégrité - clé parent introuvable</td>
+      </tr>
+      <tr>
+        <td>FK_employe</td>
+        <td>DELETE FROM SERVICE WHERE nuserv =67 ;</td>
+        <td>ORA-02292</td>
+        <td>violation de contrainte</td>
+      </tr>
+      <tr>
+        <td>FK_travaille_employe</td>
+        <td>INSERT INTO TRAVAIL VALUES (21,12,3);</td>
+        <td>ORA-02291</td>
+        <td>violation de contrainte d'intégrité - clé parent introuvable</td>
+      </tr>
+      <tr>
+        <td>FK_travaille_employe</td>
+        <td>DELETE FROM EMPLOYE WHERE nuempl =10 ;</td>
+        <td>ORA-02292</td>
+        <td>violation de contrainte</td>
+      </tr>
+      <tr>
+        <td>FK_travaille_projet</td>
+        <td>INSERT INTO TRAVAIL VALUES (10,21,3);</td>
+        <td>ORA-02291</td>
+        <td>violation de contrainte d'intégrité - clé parent introuvable</td>
+      </tr>
+      <tr>
+        <td>FK_travaille_projet</td>
+        <td>DELETE FROM PROJET WHERE nuproj =12 ;</td>
+        <td>ORA-02292</td>
+        <td>violation de contrainte</td>
+      </tr>
+      <tr>
+        <td>FK_concerne_service</td>
+        <td>INSERT INTO CONCERNE VALUES (11,12);</td>
+        <td>ORA-02291</td>
+        <td>violation de contrainte d'intégrité - clé parent introuvable</td>
+      </tr>
+      <tr>
+        <td>FK_concerne_service</td>
+        <td>DELETE FROM SERVICE WHERE nuproj =67 ;</td>
+        <td>ORA-02292</td>
+        <td>violation de contrainte</td>
+      </tr>
+      <tr>
+        <td>FK_concerne_projet</td>
+        <td>INSERT INTO CONCERNE VALUES (11,12);</td>
+        <td>ORA-02291</td>
+        <td>violation de contrainte d'intégrité - clé parent introuvable</td>
+      </tr>
+      <tr>
+        <td>FK_concerne_projet</td>
+        <td>DELETE FROM PROJET WHERE nuproj =12 ;</td>
+        <td>ORA-02292</td>
+        <td>violation de contrainte</td>
+      </tr>
+      <tr>
+        <td>FK_CHEF</td>
+        <td>INSERT INTO service VALUES (20,'Le_bde',99)&nbsp;; Commit</td>
+        <td>ORA-02091: ORA-02292:</td>
+        <td>transaction annulée violation de contrainte d'intégrité - enregistrement fils existant</td>
+      </tr>
+      <tr>
+        <td>FK_CHEF</td>
+        <td>DELETE FROM employe WHERE nuempl = 99 ; Commit</td>
+        <td>ORA-02091: ORA-02292:</td>
+        <td>transaction annulée violation de contrainte d'intégrité - enregistrement fils existant</td>
+      </tr>
+      <tr>
+        <td>EMPLOYE</td>
+        <td>insert into employe values (54,'llllaaaallaalalallalalalallalalalal',54,67);</td>
+        <td>ORA-12899</td>
+        <td>valeur trop grande pour la colonne</td>
+      </tr>
+      <tr>
+        <td>EMPLOYE</td>
+        <td>insert into employe values (540000,'la',54,67);</td>
+        <td>ORA-01438</td>
+        <td>valeur incohérente avec la précision indiquée pour cette colonne</td>
+      </tr>
+      <tr>
+        <td>K_horraire</td>
+        <td>INSERT INTO EMPLOYE VALUES (32,'LYYAM',36,33);</td>
+        <td>ORA-02290</td>
+        <td>violation de contraintes</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
 <section class="bloc-code">
@@ -385,53 +526,462 @@ HAVING COUNT(*) > 2);</code></pre>
 </section>
 
 <section class="bloc-code">
-      <header class="entete-code">
-        <div>
-          <h2 class="titre-code">Création Premier TRIGGER </h2>
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER trg_verif_salaire</h2>
+      <p class="commentaire-code">Interdit la diminution du salaire d'un employé.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER trg_verif_salaire
+AFTER UPDATE OF salaire ON EMPLOYE
+FOR EACH ROW
+BEGIN
+if :new.salaire < :old.salaire then
+raise_application_error(-20001,'viol de la règle :un salaire ne peut etre diminué') ;
+end if ;
+END;</code></pre>
+</section>
 
-        
-        </div>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger trg_verif_salaire</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">Update employe set salaire = 0 where nuempl = 7 ;</code></pre>
+</section>
 
-        <button class="bouton-copier" type="button">
-          Copier
-        </button>
-      </header>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER trg_verif_hebdo</h2>
+      <p class="commentaire-code">La durée hebdomadaire d'un employé ne peut pas augmenter.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER trg_verif_hebdo
+AFTER UPDATE OF hebdo ON EMPLOYE
+FOR EACH ROW
+BEGIN
+if :new.hebdo > :old.hebdo then
+raise_application_error(-20001,'viol de la règle :Le temps hebdo ne peux pas être augmenter') ;
+end if ;
+END;</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger trg_verif_hebdo</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">Update employe set hebdo = 35 where nuempl = 7 ;</code></pre>
+</section>
 
-      <pre><code class="language-sql">INSERT INTO utilisateurs (nom, email, date_inscription)
-VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
-    </section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER TRG_SUPPRESSION_EMP_TRA</h2>
+      <p class="commentaire-code">Suppression des lignes de travail liées à l'employé.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER TRG_SUPPRESSION_EMP_TRA AFTER DELETE ON EMPLOYE
+BEGIN DELETE TRAVAIL WHERE nuempl NOT IN (SELECT nuempl from employe);
+END;</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRG_SUPPRESSION_EMP_TRA</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">ALTER TABLE TRAVAIL DROP CONSTRAINT FK_travaille_employe;
+ALTER TABLE TRAVAIL ADD CONSTRAINT FK_travaille_employe FOREIGN KEY (nuempl) REFERENCES EMPLOYE(nuempl) INITIALLY DEFERRED ; 
 
+select * FROM TRAVAil where nuempl = 19;
+DElete employe where nuempl = 19; 
+select * FROM TRAVAil where nuempl = 19;
+rollback;</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER TRG_SUPPRIMER_PROJET</h2>
+      <p class="commentaire-code">Suppression des lignes de travail et concerne liées au projet.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER TRG_SUPPRIMER_PROJET AFTER DELETE ON projet
+BEGIN DELETE TRAVAIL WHERE nuproj NOT IN (SELECT nuproj from projet);
+DELETE concerne WHERE nuproj NOT IN (SELECT nuproj from projet);
+END;</code></pre>
+</section>
 
-    <section class="bloc-code">
-      <header class="entete-code">
-        <div>
-          <h2 class="titre-code">Ajout d’un utilisateur</h2>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRG_SUPPRIMER_PROJET</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">--Modification necessaire
+ALTER TABLE TRAVAIL DROP CONSTRAINT FK_travaille_projet;
+ALTER TABLE TRAVAIL ADD CONSTRAINT FK_travaille_projet FOREIGN KEY (nuproj) REFERENCES PROJET(nuproj)INITIALLY DEFERRED ;
+ALTER TABLE CONCERNE DROP CONSTRAINT FK_concerne_projet;
+ALTER TABLE CONCERNE ADD CONSTRAINT FK_concerne_projet FOREIGN KEY (nuproj) REFERENCES PROJET(nuproj)INITIALLY DEFERRED; 
 
-          <p class="commentaire-code">
-            Ajoute un nouvel utilisateur dans la base de données.
-          </p>
-        </div>
+select * FROM TRAVAil where nuproj = 370;
+DElete projet where nuproj = 370; 
+select * FROM TRAVAil where nuproj = 370;
+rollback;</code></pre>
+</section>
 
-        <button class="bouton-copier" type="button">
-          Copier
-        </button>
-      </header>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_SUM_HEBDO & TRIGGER_SUM_HEBDO2</h2>
+      <p class="commentaire-code">La somme des durées ne doit pas excéder le temps hebdo.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER TRIGGER_SUM_HEBDO AFTER INSERT OR UPDATE OF DUREE ON TRAVAIL
+DECLARE
+REC_employe employe%ROWTYPE;
+BEGIN
+Select * INTO REC_employe from employe e
+where (select sum(duree) from travail t where e.nuempl=t.nuempl)> hebdo ; 
+raise_application_error(-20001,'viol de la règle 1 erreur :trop d heure par rapport a la limite hebdo') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs:trop d heure par rapport a la limite hebdo') ;
+END;
 
-      <pre><code class="language-sql">INSERT INTO utilisateurs (nom, email, date_inscription)
-VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
-    </section>
+create or replace TRIGGER TRIGGER_SUM_HEBDO2 AFTER UPDATE OF HEBDO ON EMPLOYE 
+DECLARE
+REC_employe employe%ROWTYPE;
+BEGIN
+Select * INTO REC_employe from employe e
+where (select sum(duree) from travail t where e.nuempl=t.nuempl)> hebdo ; 
+raise_application_error(-20001,'viol de la règle 1 erreur :trop d heure par rapport a la limite hebdo') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs :trop d heure par rapport a la limite hebdo') ;
+END;</code></pre>
+</section>
 
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test des Triggers SUM_HEBDO</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">select * From travail;
 
+-- Test sur travail
+INSERT INTO travail values (23,20,20);
+--Ereur 1
+
+INSERT ALL INTO travail values (23,20,20) 
+            INTO travail values (20,237,50) 
+            SELECT * FROM DUAL ;
+--Ereurs multiple
+
+update travail set duree = 20 where nuempl = 23 and nuproj = 237;
+--Ereur 
+
+INSERT INTO travail values (23,20,2);
+delete from travail where nuproj = 20 and nuempl = 23;
+--Fonctionne 
+
+--Test sur employe
+
+update employe set hebdo = 1 where nuempl = 23 ; 
+-- Ereur 1
+
+update employe set hebdo = 1 ; 
+--Ereurs multiple</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_RESP_MAX</h2>
+      <p class="commentaire-code">Un employé est responsable au plus sur 3 projets.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER "TRIGGER_RESP_MAX" AFTER INSERT OR UPDATE OF RESP ON PROJET 
+DECLARE 
+REC_employe employe%ROWTYPE;
+BEGIN
+Select * INTO REC_employe from employe e
+where (select count(*) from projet p where e.nuempl=p.resp)> 3 ;
+raise_application_error(-20001,'viol de la règle 1 erreur :trop de projet pour un employe') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs :trop de projet pour un employe') ;
+END;</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_RESP_MAX</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">select * from projet; 
+insert into projet values(676,'Test',30);
+--Ereur 1
+insert ALL into projet values(676,'Test',30)
+        into projet values(858,'Test',57)
+        into projet values(999,'Test',57)
+        SELECT * FROM DUAL
+;
+--Ereurs multiple 
+
+insert into projet values(676,'Test',20);
+rollback;
+--Fonctionne
+
+update projet set resp = 30 where nuproj = 370;
+--Ereur</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_2PROJET</h2>
+      <p class="commentaire-code">Un service ne peut être concerné par plus de 3 projets.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER TRIGGER_2PROJET AFTER INSERT OR UPDATE OF NUSERV ON CONCERNE 
+DECLARE 
+REC_service service%ROWTYPE; 
+BEGIN
+SELECT * INTO REC_service FROM service s 
+WHERE (SELECT COUNT(*) FROM concerne c WHERE c.nuserv = s.nuserv) > 2; 
+raise_application_error(-20001,'viol de la règle 1 erreur:trop de projet pour un service') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs:trop de projet pour un service') ;
+END;</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_2PROJET</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">select * from concerne;
+insert into concerne values (5,101);
+--Ereur 1
+INSERT ALL into concerne values (5,101)
+            into concerne values (67,237)
+            into concerne values (67,20)
+        SELECT * FROM DUAL
+;
+--Ereur multiple
+
+insert into concerne values (67,101);
+delete from concerne where nuproj = 101;
+--Fonctionne
+
+update concerne set nuserv = 5 where nuserv = 67 ;
+--Ereur</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_SALAIRE_SERV</h2>
+      <p class="commentaire-code">Vérifie qu'un employé ne gagne pas plus (ou autant) que son chef de service.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER "TRIGGER_SALAIRE_SERV" AFTER INSERT OR UPDATE OF CHEF ON SERVICE 
+DECLARE
+REC_service service%ROWTYPE;
+BEGIN
+SELECT s.* INTO REC_service FROM service s join employe e on e.affect = s.nuserv join employe chef on s.chef = chef.nuempl
+where e.salaire > chef.salaire; 
+raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son chef') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son chef') ;
+END;</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_SALAIRE_SERV</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">--Test du triggers sur service 
+update service SET chef = 7 where nuserv = 67; 
+--Erreur</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_SALIRE_CHEF</h2>
+      <p class="commentaire-code">Vérification de la même règle lors de la modification du salaire sur un employé.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER "TRIGGER_SALIRE_CHEF"
+AFTER INSERT OR UPDATE OF salaire ON EMPLOYE 
+DECLARE
+REC_service service%ROWTYPE;
+BEGIN
+SELECT s.* INTO REC_service FROM service s join employe e on e.affect = s.nuserv join employe chef on s.chef = chef.nuempl
+where e.salaire > chef.salaire; 
+raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son chef') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son chef') ;
+END;</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_SALIRE_CHEF</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">--Test du triggers sur employe 
+update employe SET salaire = 5000 where nuempl = 7;
+--Ereure
+
+INSERT ALL into employe values (200,'paul',20,67,7000) 
+ into employe values (210,'jean',31,67,6000)
+ select * FROM DUAL ; 
+--Erreus Multiple</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_SALAIRE_PROJ</h2>
+      <p class="commentaire-code">Vérifie qu'un employé ne gagne pas plus (ou autant) que son responsable de projet.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER "TRIGGER_SALAIRE_PROJ" AFTER INSERT OR UPDATE OF resp ON Projet 
+DECLARE
+REC_projet projet%ROWTYPE;
+BEGIN
+SELECT p.* INTO REC_projet FROM projet p join travail t on t.nuproj = p.nuproj
+join employe e on e.nuempl = t.nuempl
+join employe resp on p.resp = resp.nuempl
+where e.salaire > resp.salaire;
+raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
+END;</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_SALAIRE_PROJ</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">--Test sur la Table projet 
+update projet set resp = 28 where nuproj=237; 
+--ERREUR</code></pre>
+</section>
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_SALAIRE_RESP</h2>
+      <p class="commentaire-code">Vérification de la règle responsable/employé lors de la modification d'un salaire.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER "TRIGGER_SALAIRE_RESP" AFTER INSERT OR UPDATE OF salaire ON employe 
+DECLARE
+REC_projet projet%ROWTYPE;
+BEGIN
+SELECT p.* INTO REC_projet FROM projet p join travail t on t.nuproj = p.nuproj
+join employe e on e.nuempl = t.nuempl
+join employe resp on p.resp = resp.nuempl
+where e.salaire > resp.salaire;
+raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
+END;</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_SALAIRE_RESP</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">--Test sur la table employe
+update employe set salaire = 4000 where nuempl = 10;
+--ERREUR</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Création TRIGGER_SALAIRE_TRAVAIL</h2>
+      <p class="commentaire-code">Vérification de la règle responsable/employé lors de l'insertion ou mise à jour sur travail.</p>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">create or replace TRIGGER "TRIGGER_SALAIRE_TRAVAIL" AFTER INSERT OR UPDATE ON travail 
+DECLARE
+REC_projet projet%ROWTYPE;
+BEGIN
+SELECT p.* INTO REC_projet FROM projet p join travail t on t.nuproj = p.nuproj
+join employe e on e.nuempl = t.nuempl
+join employe resp on p.resp = resp.nuempl
+where e.salaire > resp.salaire;
+raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN NULL;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
+END;</code></pre>
+</section>
+
+<section class="bloc-code">
+  <header class="entete-code">
+    <div>
+      <h2 class="titre-code">Test du Trigger TRIGGER_SALAIRE_TRAVAIL</h2>
+    </div>
+    <button class="bouton-copier" type="button">Copier</button>
+  </header>
+  <pre><code class="language-sql">--Test sur la table travail
+insert into travail values (99,12,1);
+--ERREUR 
+
+insert All into travail values(99,12,1)
+ into travail values(41,12,3) 
+ select * FROM DUAL ; 
+--ERREURS MULTIPLES</code></pre>
+</section>
     
 
     <!-- Exemple  -->
     <section class="bloc-code">
       <header class="entete-code">
-        <div>
-          <h2 class="titre-code">Ajout d’un utilisateur</h2>
+        <div>Titre</h2>
 
           <p class="commentaire-code">
-            Ajoute un nouvel utilisateur dans la base de données.
+            commentaire.
           </p>
         </div>
 
@@ -440,8 +990,7 @@ VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
         </button>
       </header>
 
-      <pre><code class="language-sql">INSERT INTO utilisateurs (nom, email, date_inscription)
-VALUES ('Jean Dupont', 'jean@example.com', CURRENT_DATE);</code></pre>
+      <pre><code class="language-sql"></code></pre>
     </section>
 
   </main>

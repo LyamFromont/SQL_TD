@@ -476,6 +476,43 @@ body::before {
     inset 0 1px 0 rgb(255 255 255 / 12%);
 }
 
+.boutons-telechargement {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 30px;
+}
+
+.bouton-telechargement {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  padding: 12px 18px;
+  border: 1px solid rgb(255 122 24 / 55%);
+  border-radius: 10px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--rouge-fonce), #bd3e19);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 25%);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 150ms ease,
+    filter 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.bouton-telechargement:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 10px 25px rgb(227 38 54 / 22%);
+  transform: translateY(-2px);
+}
+
+.bouton-telechargement:active {
+  transform: translateY(0);
+}
+
 
 /* ============================
    TITRE SECONDAIRE
@@ -578,4 +615,62 @@ body::before {
 .button-haut:hover {
   background-color: var(--rouge);
   transform: scale(1.05); /* Grossit légèrement */
+}
+
+
+/* ============================
+   TABLEAU DE DONNÉES
+============================ */
+
+.conteneur-tableau {
+  /* Permet au tableau de défiler de gauche à droite sur les petits écrans mobiles */
+  overflow-x: auto;
+  margin-bottom: 35px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
+  border: 1px solid var(--bordure, rgba(255, 255, 255, 0.1));
+}
+
+.tableau-donnees {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #282b2e; /* Fond sombre de vos blocs */
+  color: #b8bdc5; /* Couleur de texte adoucie pour une meilleure lecture */
+  font-family: inherit;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.tableau-donnees thead tr {
+  /* Dégradé orange-rouge pour l'entête */
+  background: linear-gradient(135deg, #bd3e19, rgba(255, 122, 24, 0.8));
+  color: #ffffff;
+}
+
+.tableau-donnees th {
+  padding: 15px 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.tableau-donnees td {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Ligne légèrement mise en évidence au survol de la souris */
+.tableau-donnees tbody tr:hover {
+  background-color: rgba(255, 122, 24, 0.05);
+  color: #ffffff;
+}
+
+/* Bordure orange à la fin du tableau */
+.tableau-donnees tbody tr:last-of-type td {
+  border-bottom: 3px solid rgba(255, 122, 24, 0.8);
+}
+
+/* Colorisation des codes erreurs ORA- pour les faire ressortir */
+.tableau-donnees td:nth-child(3) {
+  color: #ff7a18;
+  font-weight: bold;
 }
