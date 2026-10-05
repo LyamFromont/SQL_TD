@@ -23,7 +23,7 @@
       <span class="icone-bdd" aria-hidden="true">▰</span>
 
       <div>
-        <h1 class="titre-principal">Rendu TD</h1>
+        <h1 class="titre-principal">Rendu TD  (s3c05b)</h1>
 
         <p class="sous-titre-principal">
           Travaux dirigés sur les bases de données et le langage SQL
@@ -983,6 +983,72 @@ insert All into travail values(99,12,1)
         </div>
 
         
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>Exercice 4</h2>
+
+          <p class="commentaire-code">
+            Je supprime les projet pour pas avoir de probleme avec l'jout d'employer avec des salaire éléver et declancher d'&utre trigger
+          </p>
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">Create table EMPLOYE_ALERT AS select * from employe where 1=2 ; --Permet de récuper uniquement les attribut
+DELETE projet where projet.nuproj = 370 or nuproj = 135 or nuproj = 103 or nuproj = 492 or nuproj = 160 or nuproj = 237; -- Clear de la base pour faire le test du triggers car probleme 
+commit;</code></pre>
+    </section>
+
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>Création du Trigger TRIGGER_5000-salaire</h2>
+
+        
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">CREATE OR REPLACE TRIGGER TRIGGER_5000_SALAIRE 
+AFTER INSERT OR UPDATE OF SALAIRE ON EMPLOYE 
+FOR EACH ROW
+
+BEGIN
+    IF :NEW.SALAIRE > 5000  THEN 
+  
+        INSERT INTO EMPLOYE_ALERT values(:NEW.NUEMPL,:NEW.NOMEMPL,:NEW.HEBDO,:NEW.AFFECT,:NEW.SALAIRE);
+    END IF;
+END;
+</code></pre>
+    </section>
+    <section class="bloc-code">
+      <header class="entete-code">
+        <div>Test du Trigger TRIGGER_5000-salaire</h2>
+
+          
+        </div>
+
+        <button class="bouton-copier" type="button">
+          Copier
+        </button>
+      </header>
+
+      <pre><code class="language-sql">insert into service values(50,'TEST',89);
+insert into employe values (89,'marc',20,50,7000);
+insert into employe values (95,'paul',20,50,2000);
+commit;
+select * FROM employe_alert;
+-- On retrouve bien marc 
+update employe set salaire = 5001 where nuempl = 95;
+select * FROM employe_alert;
+-- OIn retrouve bien les deux </code></pre>
     </section>
     
 
