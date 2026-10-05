@@ -566,7 +566,7 @@ AFTER UPDATE OF hebdo ON EMPLOYE
 FOR EACH ROW
 BEGIN
 if :new.hebdo > :old.hebdo then
-raise_application_error(-20001,'viol de la règle :Le temps hebdo ne peux pas être augmenter') ;
+raise_application_error(-20002,'viol de la règle :Le temps hebdo ne peux pas être augmenter') ;
 end if ;
 END;</code></pre>
 </section>
@@ -654,10 +654,10 @@ REC_employe employe%ROWTYPE;
 BEGIN
 Select * INTO REC_employe from employe e
 where (select sum(duree) from travail t where e.nuempl=t.nuempl)> hebdo ; 
-raise_application_error(-20001,'viol de la règle 1 erreur :trop d heure par rapport a la limite hebdo') ;
+raise_application_error(-20003,'viol de la règle 1 erreur :trop d heure par rapport a la limite hebdo') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs:trop d heure par rapport a la limite hebdo') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20003,'viol de la règle plusieurs erreurs:trop d heure par rapport a la limite hebdo') ;
 END;
 
 create or replace TRIGGER TRIGGER_SUM_HEBDO2 AFTER UPDATE OF HEBDO ON EMPLOYE 
@@ -666,10 +666,10 @@ REC_employe employe%ROWTYPE;
 BEGIN
 Select * INTO REC_employe from employe e
 where (select sum(duree) from travail t where e.nuempl=t.nuempl)> hebdo ; 
-raise_application_error(-20001,'viol de la règle 1 erreur :trop d heure par rapport a la limite hebdo') ;
+raise_application_error(-20004,'viol de la règle 1 erreur :trop d heure par rapport a la limite hebdo') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs :trop d heure par rapport a la limite hebdo') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20004,'viol de la règle plusieurs erreurs :trop d heure par rapport a la limite hebdo') ;
 END;</code></pre>
 </section>
 
@@ -721,10 +721,10 @@ REC_employe employe%ROWTYPE;
 BEGIN
 Select * INTO REC_employe from employe e
 where (select count(*) from projet p where e.nuempl=p.resp)> 3 ;
-raise_application_error(-20001,'viol de la règle 1 erreur :trop de projet pour un employe') ;
+raise_application_error(-20005,'viol de la règle 1 erreur :trop de projet pour un employe') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs :trop de projet pour un employe') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20005,'viol de la règle plusieurs erreurs :trop de projet pour un employe') ;
 END;</code></pre>
 </section>
 
@@ -767,10 +767,10 @@ REC_service service%ROWTYPE;
 BEGIN
 SELECT * INTO REC_service FROM service s 
 WHERE (SELECT COUNT(*) FROM concerne c WHERE c.nuserv = s.nuserv) > 2; 
-raise_application_error(-20001,'viol de la règle 1 erreur:trop de projet pour un service') ;
+raise_application_error(-20006,'viol de la règle 1 erreur:trop de projet pour un service') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieurs erreurs:trop de projet pour un service') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20006,'viol de la règle plusieurs erreurs:trop de projet pour un service') ;
 END;</code></pre>
 </section>
 
@@ -812,10 +812,10 @@ REC_service service%ROWTYPE;
 BEGIN
 SELECT s.* INTO REC_service FROM service s join employe e on e.affect = s.nuserv join employe chef on s.chef = chef.nuempl
 where e.salaire > chef.salaire; 
-raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son chef') ;
+raise_application_error(-20007,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son chef') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son chef') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20007,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son chef') ;
 END;</code></pre>
 </section>
 <section class="bloc-code">
@@ -844,10 +844,10 @@ REC_service service%ROWTYPE;
 BEGIN
 SELECT s.* INTO REC_service FROM service s join employe e on e.affect = s.nuserv join employe chef on s.chef = chef.nuempl
 where e.salaire > chef.salaire; 
-raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son chef') ;
+raise_application_error(-20008,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son chef') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son chef') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20008,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son chef') ;
 END;</code></pre>
 </section>
 <section class="bloc-code">
@@ -882,10 +882,10 @@ SELECT p.* INTO REC_projet FROM projet p join travail t on t.nuproj = p.nuproj
 join employe e on e.nuempl = t.nuempl
 join employe resp on p.resp = resp.nuempl
 where e.salaire > resp.salaire;
-raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
+raise_application_error(-20009,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20009,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
 END;</code></pre>
 </section>
 <section class="bloc-code">
@@ -915,10 +915,10 @@ SELECT p.* INTO REC_projet FROM projet p join travail t on t.nuproj = p.nuproj
 join employe e on e.nuempl = t.nuempl
 join employe resp on p.resp = resp.nuempl
 where e.salaire > resp.salaire;
-raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
+raise_application_error(20010,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20010,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
 END;</code></pre>
 </section>
 
@@ -950,10 +950,10 @@ SELECT p.* INTO REC_projet FROM projet p join travail t on t.nuproj = p.nuproj
 join employe e on e.nuempl = t.nuempl
 join employe resp on p.resp = resp.nuempl
 where e.salaire > resp.salaire;
-raise_application_error(-20001,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
+raise_application_error(-20011,'viol de la règle 1 erreur :un employe gagne plus (ou autant ) que son responsable') ;
 EXCEPTION
 WHEN NO_DATA_FOUND THEN NULL;
-WHEN TOO_MANY_ROWS THEN raise_application_error(-20001,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
+WHEN TOO_MANY_ROWS THEN raise_application_error(-20011,'viol de la règle plusieur erreur :plusieur employe gagne plus (ou autant ) que son responsable') ;
 END;</code></pre>
 </section>
 
