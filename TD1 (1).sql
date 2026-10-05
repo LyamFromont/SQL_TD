@@ -334,3 +334,25 @@ insert All into travail values(99,12,1)
  into travail values(41,12,3) 
  select * FROM DUAL ; 
 --ERREURS MULTIPLES
+
+
+--Exercice 4 --
+Create table EMPLOYE_ALERT AS select * from employe where 1=2 ; --Permet de récuper uniquement les attribut
+
+
+
+DELETE projet where projet.nuproj = 370 or nuproj = 135 or nuproj = 103 or nuproj = 492 or nuproj = 160 or nuproj = 237; -- Clear de la base pour faire le test du triggers car probleme 
+
+commit;
+insert into service values(50,'TEST',89);
+
+
+    
+insert into employe values (89,'marc',20,50,7000);
+insert into employe values (95,'paul',20,50,2000);
+commit;
+select * FROM employe_alert;
+-- On retrouve bien marc 
+update employe set salaire = 5001 where nuempl = 95;
+select * FROM employe_alert;
+-- OIn retrouve bien les deux 
