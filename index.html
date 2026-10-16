@@ -1064,6 +1064,107 @@ select * FROM employe_alert;
         <a class="bouton-telechargement" href="TD3.sql" download="TD3.sql">Télécharger les tests</a>
       </div>
 
+      <h2 class="titre-secondaire">Tableaux d’erreurs des procédures MAJ</h2>
+
+      <h3 class="titre-tableau">CREER_EMPLOYE</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>PK</td><td>-0001</td><td>-20101</td><td>Un employé avec le même numéro existe déjà</td></tr>
+            <tr><td>FK</td><td>-2291</td><td>-20102</td><td>Le service auquel il est affecté n’existe pas</td></tr>
+            <tr><td>CHECK</td><td>-02290</td><td>-20103</td><td>La durée hebdomadaire d’un employé doit être inférieure ou égale à 35h</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20104</td><td>Une valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>Taille chaîne</td><td>-12899</td><td>-20105</td><td>Une valeur (chaine de caractère) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>SALAIRE (TRIGGER)</td><td>-20008</td><td>-20106</td><td>Le salaire de cet employé dépasse celui de son chef de service</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="titre-tableau">UPDATE_HEBDO</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>Somme travail (TRIGGER)</td><td>-20004</td><td>-20201</td><td>La durée hebdomadaire ne doit pas être supérieur au nombre d’heure de travail</td></tr>
+            <tr><td>CHECK</td><td>-02290</td><td>-20202</td><td>La durée hebdomadaire d’un employé doit être inférieure ou égale à 35h</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20203</td><td>La valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="titre-tableau">UPDATE_SALAIRE</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>OLD (TRIGGER)</td><td>-20001</td><td>-20301</td><td>Un salaire ne peut pas être diminuer</td></tr>
+            <tr><td>SALAIRE CHEF (TRIGGER)</td><td>-20008</td><td>-20302</td><td>Un employe ne peut pas gagner plus que son chef</td></tr>
+            <tr><td>SALAIRE RESP (TRIGGER)</td><td>-20010</td><td>-20303</td><td>Un employe ne peut pas gagner plus que son Responsable</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20304</td><td>La valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="titre-tableau">AJOUTER_PROJET</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>PK</td><td>-0001</td><td>-20401</td><td>Un projet avec le même numéro existe déjà</td></tr>
+            <tr><td>FK</td><td>-2291</td><td>-20402</td><td>L’employe auquel il est affecté n’existe pas</td></tr>
+            <tr><td>Somme travail (TRIGGER)</td><td>-20004</td><td>-20401</td><td>La durée hebdomadaire ne doit pas être supérieur au nombre d’heure de travail</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20404</td><td>Une valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>Taille chaîne</td><td>-12899</td><td>-20405</td><td>Une valeur (chaine de caractère) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="titre-tableau">UPDATE_DUREE_TRAVAIL</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>PK</td><td>-0001</td><td>-20501</td><td>L’employe n’existe pas / ne travail pas sur ce projet ou le projet n’existe pas</td></tr>
+            <tr><td>Somme travail (TRIGGER)</td><td>-20004</td><td>-20501</td><td>La durée hebdomadaire ne doit pas être supérieur au nombre d’heure de travail</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20504</td><td>La valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="titre-tableau">INSERER_TRAVAIL</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>PK</td><td>-0001</td><td>-20601</td><td>L’employe n’existe pas / ne travail pas sur ce projet ou le projet n’existe pas</td></tr>
+            <tr><td>FK</td><td>-2291</td><td>-20602</td><td>L’employe auquel il est affecté n’existe pas, ou le projet auquel il est affecté n’existe pas</td></tr>
+            <tr><td>Somme travail (TRIGGER)</td><td>-20004</td><td>-20601</td><td>La durée hebdomadaire ne doit pas être supérieur au nombre d’heure de travail</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20604</td><td>La valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="titre-tableau">INSERER_SERVICE</h3>
+      <div class="conteneur-tableau">
+        <table class="tableau-donnees">
+          <thead><tr><th>Erreur</th><th>Code Oracle</th><th>Code retourné</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>PK</td><td>-0001</td><td>-20701</td><td>Service deja existant</td></tr>
+            <tr><td>FK</td><td>-2291</td><td>-20702</td><td>L’employe auquel il est affecté n’existe pas ou l’employe est deja chef</td></tr>
+            <tr><td>Taille numérique</td><td>-1438</td><td>-20704</td><td>Une valeur (nombre) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>Taille chaîne</td><td>-12899</td><td>-20705</td><td>Une valeur (chaine de caractère) dépasse le nombre de caractères autorisés</td></tr>
+            <tr><td>AUTRES</td><td>—</td><td>-20999</td><td>Erreur inattendue</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <section class="bloc-code">
         <header class="entete-code">
           <div>
