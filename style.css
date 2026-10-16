@@ -345,16 +345,16 @@ body::before {
   background-color: #282b2e;
   font-family: "JetBrains Mono", Consolas, monospace;
   font-size: 0.9rem;
-  line-height: 1.1;
+  line-height: 1.2;
   tab-size: 4;
 }
 
 .ligne-code {
   display: block;
   min-width: max-content;
-  min-height: 1.1em;
+  min-height: 1.2em;
   padding-right: 24px;
-  line-height: 1.1em;
+  line-height: 1.2em;
 }
 
 /* Effet lorsque la souris passe sur une ligne */
@@ -366,7 +366,7 @@ body::before {
 .ligne-code::before {
   content: attr(data-ligne);
   display: inline-block;
-  line-height: 1.1em;
+  line-height: 1.2em;
   vertical-align: top;
   width: 55px;
   margin-right: 18px;
