@@ -38,13 +38,12 @@
       <a class="choix_td" type="button" href="#td3">TD3</a>
     </nav>
 
-    <div class="boutons-telechargement" aria-label="Téléchargements">
-      <a class="bouton-telechargement" href="TD1 (1).sql" download="TD1 (1).sql">Télécharger le fichier SQL</a>
-    <a class="bouton-telechargement" href="triggers.odt" download="triggers.odt">Télécharger Les TRIGGERS</a>
-    </div>
-
 <section id="td1"></section>
     <h2 class="titre-secondaire">TD1</h2>
+    <div class="boutons-telechargement" aria-label="Téléchargements du TD1">
+      <a class="bouton-telechargement" href="TD1.sql" download="TD1.sql">Télécharger TD1.sql</a>
+      <a class="bouton-telechargement" href="Sans%20nom%201.odt" download="Sans nom 1.odt">Télécharger le tableau</a>
+    </div>
 
     <section class="bloc-code">
       <header class="entete-code">
@@ -523,6 +522,9 @@ HAVING COUNT(*) > 2);</code></pre>
 
 <section id="td2">
     <h2 class="titre-secondaire">TD2</h2>
+    <div class="boutons-telechargement" aria-label="Téléchargements du TD2">
+      <a class="bouton-telechargement" href="TD2.sql" download="TD2.sql">Télécharger TD2.sql</a>
+      <a class="bouton-telechargement" href="TRIGGER.sql" download="TRIGGER.sql">Télécharger les triggers</a>
 </section>
 
 <section class="bloc-code">
@@ -1050,24 +1052,85 @@ update employe set salaire = 5001 where nuempl = 95;
 select * FROM employe_alert;
 -- OIn retrouve bien les deux </code></pre>
     </section>
-    
 
-    <!-- Exemple  -->
-    <section class="bloc-code">
-      <header class="entete-code">
-        <div>Titre</h2>
+    <section id="td3">
+      <h2 class="titre-secondaire">TD3</h2>
+      <div class="boutons-telechargement" aria-label="Téléchargements du TD3">
+        <a class="bouton-telechargement" href="Tableau_TD3.odt" download="Tableau_TD3.odt">Télécharger le tableau</a>
+        <a class="bouton-telechargement" href="MAJ.sql" download="MAJ.sql">Télécharger le package MAJ</a>
+        <a class="bouton-telechargement" href="MAJ_BODY.sql" download="MAJ_BODY.sql">Télécharger le body MAJ</a>
+        <a class="bouton-telechargement" href="LECTURE.sql" download="LECTURE.sql">Télécharger le package Lecture</a>
+        <a class="bouton-telechargement" href="LECTURE_BODY.sql" download="LECTURE_BODY.sql">Télécharger le body Lecture</a>
+        <a class="bouton-telechargement" href="TD3.sql" download="TD3.sql">Télécharger les tests</a>
+      </div>
 
-          <p class="commentaire-code">
-            commentaire.
-          </p>
-        </div>
+      <section class="bloc-code">
+        <header class="entete-code">
+          <div>
+            <h2 class="titre-code">Package MAJ — spécification</h2>
+            <p class="commentaire-code">Déclarations des procédures de mise à jour.</p>
+          </div>
+          <button class="bouton-copier" type="button">Copier</button>
+        </header>
+        <pre><code class="language-sql" data-source="MAJ.sql">Chargement de MAJ.sql…</code></pre>
+      </section>
 
-        <button class="bouton-copier" type="button">
-          Copier
-        </button>
-      </header>
+      <section class="bloc-code">
+        <header class="entete-code">
+          <div>
+            <h2 class="titre-code">Package MAJ — body</h2>
+            <p class="commentaire-code">Implémentation des procédures du package MAJ.</p>
+          </div>
+          <button class="bouton-copier" type="button">Copier</button>
+        </header>
+        <pre><code class="language-sql" data-source="MAJ_BODY.sql">Chargement de MAJ_BODY.sql…</code></pre>
+      </section>
 
-      <pre><code class="language-sql"></code></pre>
+      <section class="bloc-code">
+        <header class="entete-code">
+          <div>
+            <h2 class="titre-code">Tests des procédures MAJ</h2>
+            <p class="commentaire-code">Jeux d’essai des procédures de création et de mise à jour.</p>
+          </div>
+          <button class="bouton-copier" type="button">Copier</button>
+        </header>
+        <pre><code class="language-sql" data-source="TD3.sql" data-start="12" data-end="148">Chargement des tests MAJ…</code></pre>
+      </section>
+
+      <h2 class="titre-secondaire">Package Lecture</h2>
+
+      <section class="bloc-code">
+        <header class="entete-code">
+          <div>
+            <h2 class="titre-code">Package Lecture — spécification</h2>
+            <p class="commentaire-code">Déclarations des procédures de consultation, sans tableau associé.</p>
+          </div>
+          <button class="bouton-copier" type="button">Copier</button>
+        </header>
+        <pre><code class="language-sql" data-source="LECTURE.sql">Chargement de LECTURE.sql…</code></pre>
+      </section>
+
+      <section class="bloc-code">
+        <header class="entete-code">
+          <div>
+            <h2 class="titre-code">Package Lecture — body</h2>
+            <p class="commentaire-code">Implémentation des procédures de consultation.</p>
+          </div>
+          <button class="bouton-copier" type="button">Copier</button>
+        </header>
+        <pre><code class="language-sql" data-source="LECTURE_BODY.sql">Chargement de LECTURE_BODY.sql…</code></pre>
+      </section>
+
+      <section class="bloc-code">
+        <header class="entete-code">
+          <div>
+            <h2 class="titre-code">Tests des procédures Lecture</h2>
+            <p class="commentaire-code">Appels de test des procédures de consultation, sans tableau.</p>
+          </div>
+          <button class="bouton-copier" type="button">Copier</button>
+        </header>
+        <pre><code class="language-sql" data-source="TD3.sql" data-start="152" data-end="166">Chargement des tests Lecture…</code></pre>
+      </section>
     </section>
 
   </main>
@@ -1075,7 +1138,43 @@ select * FROM employe_alert;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
 
   <script>
-    document.querySelectorAll("pre code").forEach((blocCode) => {
+    async function chargerCodeSQL() {
+      const blocsExternes = [...document.querySelectorAll("pre code[data-source]")];
+      const fichiers = new Map();
+
+      await Promise.all(blocsExternes.map(async (blocCode) => {
+        const fichier = blocCode.dataset.source;
+
+        try {
+          if (!fichiers.has(fichier)) {
+            fichiers.set(fichier, fetch(fichier).then((reponse) => {
+              if (!reponse.ok) {
+                throw new Error(`HTTP ${reponse.status}`);
+              }
+
+              return reponse.text();
+            }));
+          }
+
+          let contenu = await fichiers.get(fichier);
+          if (blocCode.dataset.start && blocCode.dataset.end) {
+            contenu = contenu.split(/\r?\n/)
+              .slice(Number(blocCode.dataset.start) - 1, Number(blocCode.dataset.end))
+              .join("\n");
+          } else {
+            contenu = contenu.trimEnd();
+          }
+
+          blocCode.textContent = contenu;
+        } catch (erreur) {
+          blocCode.textContent = `Impossible de charger ${fichier}. Utilisez le lien de téléchargement correspondant.`;
+          blocCode.classList.add("chargement-erreur");
+          blocCode.closest(".bloc-code").querySelector(".bouton-copier").disabled = true;
+          console.error(`Impossible de charger ${fichier} :`, erreur);
+        }
+      }));
+
+      document.querySelectorAll("pre code").forEach((blocCode) => {
       // Conservation du code original pour le bouton Copier
       blocCode.dataset.codeOriginal = blocCode.textContent;
 
@@ -1097,7 +1196,9 @@ select * FROM employe_alert;
           `;
         })
         .join("");
-    });
+      });
+    };
+    chargerCodeSQL();
 
     // Gestion des boutons Copier
     document.querySelectorAll(".bouton-copier").forEach((bouton) => {

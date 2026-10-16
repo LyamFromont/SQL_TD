@@ -180,7 +180,7 @@ body::before {
 ============================ */
 
 .bloc-code {
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   overflow: hidden;
   border: 1px solid var(--bordure);
   border-radius: 13px;
@@ -219,7 +219,7 @@ body::before {
   justify-content: space-between;
   align-items: center;
   gap: 25px;
-  padding: 18px 22px;
+  padding: 12px 18px;
   border-bottom: 1px solid #393939;
   background:
     linear-gradient(
@@ -316,6 +316,11 @@ body::before {
   transform: translateY(0);
 }
 
+.bouton-copier:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 
 /* ============================
    CODE ANDROID STUDIO
@@ -334,18 +339,18 @@ body::before {
 
 .bloc-code code.hljs {
   display: block;
-  padding: 18px 0;
+  padding: 10px 0;
   background-color: #282b2e;
   font-family: "JetBrains Mono", Consolas, monospace;
-  font-size: 0.95rem;
-  line-height: 1.65;
+  font-size: 0.9rem;
+  line-height: 0.5;
   tab-size: 4;
 }
 
 .ligne-code {
   display: block;
   min-width: max-content;
-  min-height: 1.65em;
+  min-height: 0cm;
   padding-right: 24px;
 }
 
@@ -404,7 +409,7 @@ body::before {
   }
 
   .bloc-code code.hljs {
-    font-size: 0.84rem;
+    font-size: 0.8rem;
   }
 
   .ligne-code::before {
@@ -629,6 +634,12 @@ body::before {
   border-radius: 10px;
   box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
   border: 1px solid var(--bordure, rgba(255, 255, 255, 0.1));
+}
+
+.titre-tableau {
+  margin: 22px 0 10px;
+  color: var(--orange-clair);
+  font-size: 1.05rem;
 }
 
 .tableau-donnees {
