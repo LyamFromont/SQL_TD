@@ -1188,12 +1188,7 @@ select * FROM employe_alert;
         .map((ligne, index) => {
           const contenu = ligne || "&#8203;";
 
-          return `
-            <span
-              class="ligne-code"
-              data-ligne="${index + 1}"
-            >${contenu}</span>
-          `;
+          return `<span class="ligne-code" data-ligne="${index + 1}">${contenu}</span>`;
         })
         .join("");
       });
