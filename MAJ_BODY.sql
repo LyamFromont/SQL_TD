@@ -24,14 +24,18 @@ EXCEPTION WHEN OTHERS THEN ROLLBACK;
 END IF; 
 END;
 PROCEDURE UPDATE_HEBDO (LE_NUEMPL IN NUMBER, LE_HEBDO IN NUMBER) is
+PAS_employe Exception ; 
 BEGIN
 SET TRANSACTION READ WRITE;
 UPDATE employe set hebdo = le_hebdo where nuempl = LE_NUEMPL ;
 IF SQL%NOTFOUND THEN 
-        RAISE_APPLICATION_ERROR(-20200, 'L employe n existe pas');
-    END IF;
+       RAISE PAS_employe;
+END IF;
 COMMIT;
-EXCEPTION WHEN OTHERS THEN ROLLBACK;
+EXCEPTION
+WHEN PAS_employe then ROLLBACK ;
+ 	RAISE_APPLICATION_ERROR(-20200, 'L employe n existe pas') ;
+WHEN OTHERS THEN ROLLBACK;
     IF SQLCODE=-20004 THEN ROLLBACK;
           RAISE_APPLICATION_ERROR (-20201, '"La durée hebdomadaire ne doit pas être Superieur au nombre d’heure de travail"');
     ELSIF SQLCODE=-02290 then rollback;
@@ -48,14 +52,18 @@ PROCEDURE UPDATE_SALAIRE  (LE_NUEMPL IN NUMBER, LE_SALAIRE IN NUMBER) is
 BEGIN
 SET TRANSACTION READ WRITE;
 UPDATE employe set salaire = le_salaire where nuempl = le_nuempl;
+PAS_employe Exception ;
 IF SQL%NOTFOUND THEN 
-        RAISE_APPLICATION_ERROR(-20300, 'L employe n existe pas');
+        RAISE PAS_employe
     END IF;
 COMMIT;
-EXCEPTION WHEN OTHERS THEN ROLLBACK;
+EXCEPTION
+WHEN PAS_employe THEN ROLLBACK;
+	RAISE_APPLICATION_ERROR(-20300, 'L employe n existe pas');
+ WHEN OTHERS THEN ROLLBACK;
     IF SQLCODE=-20001 THEN ROLLBACK;
           RAISE_APPLICATION_ERROR (-20301, 'Un salaire ne peut pas être diminuer');
-    ELSIF SQLCODE=-20008 then rollback;
+    ELSIF SQLCODE=-20008 ;
             RAISE_APPLICATION_ERROR (-20302,'Un employe ne peut pas gagner plus que son chef');
     ELSIF SQLCODE = -20010 THEN 
           RAISE_APPLICATION_ERROR (-20303, 'Un employe ne peut pas gagner plus que son Responsable');
@@ -178,13 +186,16 @@ BEGIN
     INSERT INTO service (nuserv, nomserv, chef) VALUES (LE_NUSERV, LE_NOMSERV, LE_NUEMPL_CHEF);
     
     UPDATE employe SET affect = LE_NUSERV WHERE nuempl = LE_NUEMPL_CHEF;
-    
-    IF SQL%NOTFOUND THEN 
-        RAISE_APPLICATION_ERROR(-20702, 'n existe Pas ou l employe est deja chef');
+    PAS_employe_dejaChef Exception ; 
+IF SQL%NOTFOUND THEN
+        RAISE PAS_employe_dejaChef 
+        
     END IF;
     
     COMMIT;
-EXCEPTION 
+EXCEPTION
+WHEN  PAS_employe_dejaChef THEN ROLLBACK ;
+	RAISE_APPLICATION_ERROR(-20702, 'n existe Pas ou l employe est deja chef');
     WHEN OTHERS THEN 
         IF SQLCODE = -00001 THEN 
             ROLLBACK;
